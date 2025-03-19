@@ -1,0 +1,15 @@
+.on-success-sign-up-page-wrapper {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .on-success-sign-up-page-container {
+        width: 60%;
+        .on-success-text {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+    }
+}

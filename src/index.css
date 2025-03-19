@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  font-family: 'Roboto';
+  font-size: 16px;
+}
+
+button, input, a, h1, h2, h3, p, span{
+  all: unset;
+}
+
+button {
+  cursor: pointer;
+}
+
+*, *::before, *::after, p {
+  box-sizing: border-box;
+}
+

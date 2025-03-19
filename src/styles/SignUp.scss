@@ -1,0 +1,47 @@
+.input-sign-up-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 32px;
+
+    .input__container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .output-error-pisition__configurator {
+        width: 60%;
+
+        input {
+            border: 1px solid black;
+            height: 5rem;
+            width: 100%;
+            border-radius: 10px;
+            text-indent: 16px;
+            font-size: 1.25rem;
+            color: #545454;
+            font-weight: 300;
+        }
+
+        input:focus {
+            border: 2px solid rgb(33, 143, 0);
+            box-sizing: border-box;
+        }
+
+        .show-validation-error {
+            font-size: 12px;
+            color: red;
+            padding: 2px;
+            align-self: flex-start;
+        }
+    }
+
+    .button-container-sign-up {
+        width: 100%;
+        padding: 16px 0 40px 0;
+    }
+}

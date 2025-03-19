@@ -1,0 +1,30 @@
+@media screen and (max-width: 800px) {
+  .output-error-pisition__configurator {
+    width: 80% !important;
+  }
+}
+@media screen and (max-width: 800px) and (max-width: 550px) {
+  .output-error-pisition__configurator {
+    width: 100% !important;
+  }
+}
+@media screen and (max-width: 800px) {
+  .user-email-phone-number_input-container {
+    width: 90% !important;
+  }
+}
+@media screen and (max-width: 800px) and (max-width: 550px) {
+  .user-email-phone-number_input-container {
+    width: 100% !important;
+  }
+}
+@media screen and (max-width: 800px) {
+  .button-continue {
+    width: 80% !important;
+  }
+}
+@media screen and (max-width: 800px) and (max-width: 550px) {
+  .button-continue {
+    width: 100% !important;
+  }
+}/*# sourceMappingURL=auth-form-media-req.css.map */

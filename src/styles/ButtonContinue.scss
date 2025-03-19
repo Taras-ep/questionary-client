@@ -1,0 +1,44 @@
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    button {
+        text-align: center;
+        height: 5rem;
+        width: 60%;
+        border-radius: 10px;
+        font-size: 1.25rem;
+        color: rgb(255, 255, 255);
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        cursor: pointer;
+        animation-duration: 100ms;
+        animation-name: buttonAnimationOnHover;
+        animation-fill-mode: forwards;
+    }
+
+    button:active {
+        animation-duration: 1s;
+        transform: translate(0, 1px);
+        animation-name: buttonAnimationOnClick;
+
+    }
+
+}
+
+@keyframes buttonAnimationOnClick {
+    to {
+        background-color: #9e9292;
+    }
+}
+
+@keyframes buttonAnimationOnHover {
+    to {
+        box-shadow: 0 0 9px rgba(0, 123, 255, 0.5);
+        font-size: 1.3rem;
+    }
+}

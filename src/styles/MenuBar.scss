@@ -1,0 +1,68 @@
+.menu-bar-container {
+    position: fixed;
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 0 10px gray;
+
+    .button {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        color: #fff;
+        font-size: 1.4rem;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: background 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        &:active {
+            transform: scale(0.98);
+        }
+    }
+
+    .catalog-button {
+        background-color: #007bff;
+
+        &:hover {
+            background-color: #0056b3;
+        }
+
+        &:active {
+            background-color: #004494;
+        }
+    }
+
+    .log-in-button {
+        background-color: #489635;
+
+        &:hover {
+            background-color: #377727;
+        }
+
+        &:active {
+            background-color: #377727;
+        }
+    }
+
+    .main-title {
+        font-size: 2rem;
+        font-weight: 500;
+        color: rgb(218, 67, 92);
+
+        .user-page {
+            display: flex;
+            width: 100%;
+            gap: 5rem;
+
+        }
+    }
+}
