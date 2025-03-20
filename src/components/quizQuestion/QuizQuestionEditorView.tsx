@@ -1,14 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { removeQuestionFromQuiz } from "../../Utils/Redux/QuizCatalogReducer.ts";
-import {QuizQuestion} from "../../models/QuizQuestionState.ts";
+import { QuizQuestion } from "../../models/QuizQuestionState.ts";
+import QuizQuestionView from "./QuizQuestionView.tsx";
 import DeleteButton from "../utils/DeleteButton.tsx";
 import './QuizQuestion.scss'
 
 interface QuizQuestionEditorViewProps {
     quizId: string,
     question: QuizQuestion,
-    questionNumber: number
+    questionIndex: number
 }
 
 const QuizQuestionEditorView = (props: QuizQuestionEditorViewProps) => {
@@ -16,17 +17,18 @@ const QuizQuestionEditorView = (props: QuizQuestionEditorViewProps) => {
     return (
         <div className="quiz-question-view-container">
             <div className="top-view-container">
-                <div className="quiz-question-index">{props.questionNumber}</div>
-                <div className="quiz-question-output">{props.question.questionText}</div>
+                <div className="quiz-question-index">{props.questionIndex + 1}</div>
+
+                <QuizQuestionView quizId={props.quizId} question={props.question} preview={true} />
                 <button
                     aria-label="edit-question"
                     type="button"
                     className="button-edit"
-                    onClick={() => {}}
+                    onClick={() => { }}
                 >
                     EDIT
                 </button>
-                <DeleteButton onDelete={() => dispatch(removeQuestionFromQuiz({questionId:props.question.id, quizId: props.quizId}))} />
+                <DeleteButton onDelete={() => dispatch(removeQuestionFromQuiz({ questionId: props.question.id, quizId: props.quizId }))} />
             </div>
         </div>
     )

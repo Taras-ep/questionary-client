@@ -22,7 +22,7 @@ const QuizAttemptPage = () => {
         <div className="take-quiz-page-container">
             {
                 quizQuestions.map((value, index) => {
-                    return <QuizQuestionView key={index} quizId={quizId!} questionIndex={index} question={value}/>
+                    return <QuizQuestionView key={index} quizId={quizId!} questionIndex={index} question={value} preview={false}/>
                 })
             }
             <button onClick={() => dispatch(submitQuiz(quizId!))}>Sumbit</button>

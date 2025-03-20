@@ -7,21 +7,22 @@ import './QuizQuestionView.scss'
 import { setUserAnswer } from "../../Utils/Redux/QuizAttemptReducer.ts";
 
 interface QuizQuestionViewProps {
+    preview: boolean,
     quizId: string,
-    questionIndex: number,
+    questionIndex?: number,
     question: QuizQuestion,
 }
 
 const QuizQuestionView = (props: QuizQuestionViewProps) => {
     const dispatch = useDispatch()
 
-    const [inputText, setInputText] = useState("")
-    const [selectedChoices, setSelectedChoices] = useState<Set<number>>(new Set())
+    const [inputText, setInputText] = useState(!props.preview ? "" : "Answer")
+    const [selectedChoices, setSelectedChoices] = useState<Set<number>>(!props.preview ? new Set() : new Set([0]))
 
     function setAnswer(answer: string | number[]) {
         dispatch(setUserAnswer({
             questionId: props.question.id,
-            questionIndex: props.questionIndex,
+            questionIndex: props.questionIndex!,
             answer: answer
         }))
     }
@@ -30,13 +31,16 @@ const QuizQuestionView = (props: QuizQuestionViewProps) => {
         return <label>
             Answer:
             <input
+                disabled={props.preview}
                 type="text"
                 name="inputText"
                 value={inputText}
                 onChange={e => {
-                    const value = e.target.value
-                    setInputText(value)
-                    setAnswer(value)
+                    if (!props.preview) {
+                        const value = e.target.value
+                        setInputText(value)
+                        setAnswer(value)
+                    }
                 }}
             />
         </label>
@@ -46,27 +50,29 @@ const QuizQuestionView = (props: QuizQuestionViewProps) => {
         return props.question.options?.map((value, index) => (
             <label key={value}>
                 <input
+                    disabled={props.preview}
                     type={isMultiple ? "checkbox" : "radio"}
                     name="options"
                     value={value}
                     checked={selectedChoices.has(index)}
-                    onChange={e => {
-                        let updatedChoices = new Set(selectedChoices); 
+                    onChange={() => {
+                        if (!props.preview) {
 
-                        if (!isMultiple) {
-                            updatedChoices.clear()
+                            let updatedChoices = new Set(selectedChoices);
+
+                            if (!isMultiple) {
+                                updatedChoices.clear()
+                            }
+
+                            if (!updatedChoices.has(index)) {
+                                updatedChoices.add(index)
+                            } else {
+                                updatedChoices.delete(index)
+                            }
+                            setSelectedChoices(updatedChoices)
+
+                            setAnswer(Array.from(updatedChoices))
                         }
-
-                        if (!updatedChoices.has(index)) {
-                            updatedChoices.add(index)
-                        } else {
-                            updatedChoices.delete(index)
-                        }
-                        console.log("IS CHECKED " + e.target.checked)
-                        console.log("IS CHECKED " + Array.from(selectedChoices))
-                        setSelectedChoices(updatedChoices)
-
-                        setAnswer(Array.from(updatedChoices))
                     }}
                 />
                 {value}
@@ -85,7 +91,7 @@ const QuizQuestionView = (props: QuizQuestionViewProps) => {
     return (
         <div className="quiz-question-view-container">
             <div className="top-view-container">
-                <div className="quiz-question-index">{props.questionIndex + 1}</div>
+                {props.questionIndex ? <div className="quiz-question-index">{props.questionIndex + 1}</div> : null}
                 <div className="quiz-question-output">{props.question.questionText}</div>
                 {renderInputs(props.question.questionType!)}
             </div>

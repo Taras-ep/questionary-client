@@ -13,7 +13,7 @@ const DeleteButton = (props:DeleteButtonProps) => {
             className="button-delete"
             onClick={props.onDelete}
         >
-            <img src="./icons/trashbin_icon.svg" alt="delete" />
+            <img src="../../icons/trashbin_icon.svg" alt="delete" />
         </button>
     )
 }

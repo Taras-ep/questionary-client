@@ -38,7 +38,7 @@ const QuizEditorPage = () => {
         <main className="quiz-editor-container">
             <div className="quiz-editor">
                 {questions !== undefined && questions.length > 0 ? (
-                    questions.map((question, index) => <QuizQuestion quizId={quizId!} key={question.id} question={question} questionNumber={index + 1} />)
+                    questions.map((question, index) => <QuizQuestion quizId={quizId!} key={question.id} question={question} questionIndex={index} />)
                 ) : (
                     <div className="output-alt-text"><p>No questions yet</p></div>
                 )}

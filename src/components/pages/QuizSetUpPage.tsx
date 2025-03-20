@@ -57,7 +57,7 @@ const QuizSetUpPage = () => {
                 <div className="buttons-container">
                     <button type="button" className="button cancle-btn" onClick={() => navigate('/')}>CANCEL</button>
                     <button type="button" className="button continue-btn" onClick={handleSave}>
-                        {quizId ? "SAVE CHANGES" : "CONTINUE"}
+                        CONTINUE
                     </button>
                 </div>
             </form>

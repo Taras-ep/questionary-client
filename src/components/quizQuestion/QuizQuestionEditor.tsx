@@ -7,15 +7,15 @@ import './QuizQuestion.scss'
 interface QuizQuestionEditorProps {
     quizId: string,
     question: QuizQuestion,
-    questionNumber: number
+    questionIndex: number
 }
 
-const QuizQuestionEditor: React.FC<QuizQuestionEditorProps> = ({ quizId, question, questionNumber }) => {
+const QuizQuestionEditor: React.FC<QuizQuestionEditorProps> = ({ quizId, question, questionIndex }) => {
     return (
         <div className="quiz-question-edit-container">
             {question.isEdit
-                ? <QuizQuestionEditorForm quizId={quizId} question={question} questionNumber={questionNumber} />
-                : <QuizQuestionEditorView quizId={quizId} question={question} questionNumber={questionNumber} />}
+                ? <QuizQuestionEditorForm quizId={quizId} question={question} questionNumber={questionIndex} />
+                : <QuizQuestionEditorView quizId={quizId} question={question} questionIndex={questionIndex} />}
         </div>
     );
 };
