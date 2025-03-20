@@ -7,6 +7,10 @@
         color: rgb(112, 0, 0);
     }
 
+    .quiz-card-menu {
+        position: absolute;
+    }
+
     .quiz-list {
         padding: 2rem;
         display: flex;
@@ -26,6 +30,78 @@
             position: relative;
             transition: background box-shadow color 0.3s;
             transition: transform 0.2s;
+            z-index: 1;
+
+            .quiz-card-menu {
+                
+                padding: 0.5rem;
+                box-sizing: border-box;
+                position: absolute;
+                top: 0;
+                left: 0;
+                -webkit-backdrop-filter: blur(8px);
+                backdrop-filter: blur(8px);
+                border-radius: 10px;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .button {
+                    padding: 0.8rem;
+                    text-align: center;
+                    width: 100%;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    transition: 0.3s;
+                }
+                .buttons-container {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 1rem;
+                    width: 100%;
+                
+                    .delete-btn {
+                        background-color: rgb(160, 0, 8);
+                
+                        &:hover {
+                            background: rgb(255, 30, 30);
+                        }
+                        &:active {
+                            transform: scale(0.95);
+                        }
+                    }
+                
+                    .edit-btn {
+                        background-color: rgb(0, 38, 255);
+                
+                        &:hover {
+                            background: rgb(24, 40, 252);
+                        }
+                        &:active {
+                            transform: scale(0.95);
+                        }
+                    }
+                }
+                .back-btn {
+                    background-color: rgb(255, 255, 255, 0);
+                    border: 1px solid black;
+                    margin-top: 1rem;
+                    width: 80%;
+                    color: black;
+            
+                    &:hover {
+                        background: rgb(212, 212, 212);
+                    }
+                    &:active {
+                        transform: scale(0.95);
+                    }
+                }
+            }
 
             &:hover {
                 background-color: #eeeded;
@@ -35,10 +111,12 @@
             }
 
             .menu {
+                z-index: 2;
                 position: absolute;
                 top: 10px;
                 right: 10px;
                 cursor: pointer;
+                font-size: 2rem;
             }
         }
 

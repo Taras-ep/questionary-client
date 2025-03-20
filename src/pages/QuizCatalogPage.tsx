@@ -1,17 +1,29 @@
-// QuizCatalog.tsx
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../models/RootState";
-import '../styles/QuizCatalog.scss';
+import "../styles/QuizCatalog.scss";
 import { useNavigate } from "react-router-dom";
+import { clearAnswers } from "../Utils/Redux/QuizAttemptReducer.ts";
+import QuizCard from "../quiz/QuizCard.tsx";
 
 const QuizCatalog = () => {
     const navigate = useNavigate();
-    const quizzes = useSelector((state: RootState) => state.quizzes.allIds); 
+    const dispatch = useDispatch();
+    const quizzes = useSelector((state: RootState) => state.quizzes.allIds);
     const quizById = useSelector((state: RootState) => state.quizzes.byId);
+    const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
+
+    function handleClick(quizId: string) {
+        setActiveMenuId((prev) => (prev === quizId ? null : quizId));
+    }
 
     function quizSetUpHandleClick() {
-        navigate('/QuizSetUpPage');
+        navigate("/QuizSetUpPage");
+    }
+
+    function quizStartHandleClick(quizId: string) {
+        dispatch(clearAnswers())
+        navigate(`StartQuiz/${quizId}`);
     }
 
     return (
@@ -27,12 +39,14 @@ const QuizCatalog = () => {
                     quizzes.map((quizId) => {
                         const quiz = quizById[quizId];
                         return (
-                            <div key={quizId} className="quiz-card">
-                                <h3>{quiz.name}</h3>
-                                <p>{quiz.description}</p>
-                                <a href="#">Questions: {quiz.questions.length}</a>
-                                <span className="menu">⋮</span>
-                            </div>
+                            <QuizCard
+                                key={quizId}
+                                quizId={quizId}
+                                quiz={quiz}
+                                isMenuActive={activeMenuId === quizId}
+                                onOptionsClick={() => handleClick(quizId)}
+                                onCardClick={() => quizStartHandleClick(quizId)}
+                            />
                         );
                     })
                 )}

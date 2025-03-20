@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Quiz, QuizzesState } from "../../models/Quiz.ts";
+import { Quiz, QuizzesState } from "../../models/QuizState.ts";
 
 const initialState: QuizzesState = {
   byId: {},

@@ -1,9 +1,0 @@
-@media screen and (max-width: 1300px) {
-  .controls-panel {
-    display: none !important;
-  }
-  .add-button {
-    right: 50% !important;
-    transform: translate(50%, 0) !important;
-  }
-}/*# sourceMappingURL=main-page-media-requests.css.map */

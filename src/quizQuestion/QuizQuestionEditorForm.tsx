@@ -3,16 +3,16 @@ import '../styles/UserQuizQuestionForm.scss'
 import { useDispatch } from "react-redux";
 import { addQuestionToQuiz, removeQuestionFromQuiz } from "../Utils/Redux/QuizCatalogReducer.ts";
 import { addQuizQuestion, updateQuizQuestion, removeQuizQuestion } from "../Utils/Redux/QuizQuestionReducer.ts";
-import { QuizQuestion } from "../models/QuizQuestion.ts";
+import { QuizQuestion, TEXT_QUESTIO0N_TYPE, MULTIPLE_CHOICE_QUESTION_TYPE, SINGLE_CHOICE_QUESTION_TYPE } from "../models/QuizQuestionState.ts";
 import DeleteButton from "../Utils/DeleteButton.tsx";
 
-interface QuizQuestionEditorProps {
+interface QuizQuestionEditorFormProps {
     quizId: string,
     question: QuizQuestion,
     questionNumber: number
 }
 
-const QuizQuestionEditor = (props: QuizQuestionEditorProps) => {
+const QuizQuestionEditorForm = (props: QuizQuestionEditorFormProps) => {
 
     const dispatch = useDispatch()
 
@@ -81,9 +81,9 @@ const QuizQuestionEditor = (props: QuizQuestionEditorProps) => {
                 <div className="top-container">
                     <input ref={questionTextRef} aria-label="questionText" placeholder="QUESTION" className="question-text" type="text" />
                     <select onChange={(e) => { setQuestionType(e.target.value) }} title="question-type" name="select-question-type" className="question-type-selection">
-                        <option>Text</option>
-                        <option>Single choice</option>
-                        <option>Multiple choice</option>
+                        <option>{TEXT_QUESTIO0N_TYPE}</option>
+                        <option>{SINGLE_CHOICE_QUESTION_TYPE}</option>
+                        <option>{MULTIPLE_CHOICE_QUESTION_TYPE}</option>
                     </select>
                 </div>
 
@@ -105,4 +105,4 @@ const QuizQuestionEditor = (props: QuizQuestionEditorProps) => {
     )
 }
 
-export default QuizQuestionEditor 
+export default QuizQuestionEditorForm 
