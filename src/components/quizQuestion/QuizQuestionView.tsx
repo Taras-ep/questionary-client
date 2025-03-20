@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { removeQuestionFromQuiz } from "../../Utils/Redux/QuizCatalogReducer.ts";
 import { QuizQuestion, MULTIPLE_CHOICE_QUESTION_TYPE, TEXT_QUESTIO0N_TYPE, SINGLE_CHOICE_QUESTION_TYPE } from "../../models/QuizQuestionState.ts";
 import DeleteButton from "../utils/DeleteButton.tsx";
-import './QuizQuestion.scss'
+import './QuizQuestionView.scss'
 import { setUserAnswer } from "../../Utils/Redux/QuizAttemptReducer.ts";
 
 interface QuizQuestionViewProps {
@@ -28,6 +28,7 @@ const QuizQuestionView = (props: QuizQuestionViewProps) => {
 
     function renderTextInput() {
         return <label>
+            Answer:
             <input
                 type="text"
                 name="inputText"
@@ -38,7 +39,6 @@ const QuizQuestionView = (props: QuizQuestionViewProps) => {
                     setAnswer(value)
                 }}
             />
-            Text:
         </label>
     }
 
