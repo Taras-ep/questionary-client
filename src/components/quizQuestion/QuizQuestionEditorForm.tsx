@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import './UserQuizQuestionForm.scss'
 import { useDispatch } from "react-redux";
-import { addQuestionToQuiz, removeQuestionFromQuiz } from "../../Utils/Redux/QuizCatalogReducer.ts";
+import { replaceQuestionInQuiz, removeQuestionFromQuiz } from "../../Utils/Redux/QuizCatalogReducer.ts";
 import { addQuizQuestion, updateQuizQuestion, removeQuizQuestion } from "../../Utils/Redux/QuizQuestionReducer.ts";
 import { QuizQuestion, TEXT_QUESTIO0N_TYPE, MULTIPLE_CHOICE_QUESTION_TYPE, SINGLE_CHOICE_QUESTION_TYPE } from "../../models/QuizQuestionState.ts";
 import DeleteButton from "../utils/DeleteButton.tsx";
@@ -29,15 +29,18 @@ const QuizQuestionEditorForm = (props: QuizQuestionEditorFormProps) => {
 
     function updateQuizQuestionOnClick() {
         if (questionTextRef.current) {
+            const newQuestionId = crypto.randomUUID()
+            const oldQuestionId = props.question.id
             const updatedQuestion: QuizQuestion = {
-                id: props.question.id,
+                id: newQuestionId,
                 questionText: questionTextRef.current.value,
                 questionType: questionType,
                 isEdit: false,
                 options: options
             };
 
-            dispatch(updateQuizQuestion(updatedQuestion));
+            dispatch(updateQuizQuestion({oldQuestionId, question: updatedQuestion}));
+            dispatch(replaceQuestionInQuiz({quizId: props.quizId, oldQuestionId, newQuestionId}));
         }
     }
 

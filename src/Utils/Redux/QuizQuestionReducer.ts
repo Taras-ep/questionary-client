@@ -15,10 +15,11 @@ const quizQuestionSlice = createSlice({
             state.byId[id] = action.payload;
             state.allIds.push(id);
         },
-        updateQuizQuestion: (state, action: PayloadAction<QuizQuestion>) => {
-            const { id } = action.payload;
-            if (state.byId[id]) {
-                state.byId[id] = action.payload;
+        updateQuizQuestion: (state, action: PayloadAction<{oldQuestionId: string, question:QuizQuestion}>) => {
+            const { oldQuestionId, question} = action.payload;
+            if (state.byId[oldQuestionId]) {
+                state.byId[question.id] = question;
+                state.allIds.push(question.id)
             }
         },
         removeQuizQuestion: (state, action: PayloadAction<string>) => {

@@ -29,12 +29,11 @@ const QuizSetUpPage = () => {
             const quizDescription = quizDescriptionRef.current.value;
 
             if (quizName && quizDescription) {
-                let targetQuizId = quizId;
+                let targetQuizId = crypto.randomUUID();
 
                 if (quizId) {
-                    dispatch(editQuiz({ id: quizId, name: quizName, description: quizDescription }));
+                    dispatch(editQuiz({ id: quizId, newId: targetQuizId, name: quizName, description: quizDescription }));
                 } else {
-                    targetQuizId = crypto.randomUUID();
                     dispatch(addQuiz({ id: targetQuizId, name: quizName, description: quizDescription }));
                 }
                 navigate(`/EditQuiz/${targetQuizId}`);
