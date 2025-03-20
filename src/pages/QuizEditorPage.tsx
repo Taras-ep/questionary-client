@@ -3,7 +3,7 @@ import '../styles/QuizEditorPage.scss'
 import '../styles/mediaRequests/main-page-media-requests.scss'
 import { useDispatch } from "react-redux";
 import QuizQuestion from "../quizQuestion/QuizQuestion.tsx";
-import { addQuizQuestion } from "../Utils/Redux/QuizQuestionReducer.ts";
+import { addQuizQuestion } from "../Utils/Redux/QuizCatalogReducer.ts";
 import { useSelector } from "react-redux";
 import { QuizStore } from "../Utils/Redux/Store.ts";
 

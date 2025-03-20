@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import quizQuestionReducer, { Quiz } from './QuizQuestionReducer.ts';
+import quizQuestionReducer, { Quiz } from './QuizCatalogReducer.ts';
 import getUserReducer, { AuthState } from './AuthUserReducer.ts'
 
 interface QuizStore {

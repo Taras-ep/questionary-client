@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removeQuizQuestion, updateQuizQuestion } from "../Utils/Redux/QuizQuestionReducer.ts";
+import { removeQuizQuestion, updateQuizQuestion } from "../Utils/Redux/QuizCatalogReducer.ts";
 import QuizQuestion from "../models/QuizQuestion.ts";
+import DeleteButton from "../Utils/DeleteButton.tsx";
 import '../styles/QuizQuestion.scss'
 
 interface QuizQuestionEditorProps {
@@ -24,17 +25,34 @@ const QuizQuestionView = (props: QuizQuestionEditorProps) => {
                 >
                     EDIT
                 </button>
-                <button
-                    aria-label="delete-question"
-                    type="button"
-                    className="button-delete"
-                    onClick={() => dispatch(removeQuizQuestion(props.question.id))}
-                >
-                    <img src="./icons/trashbin_icon.svg" alt="delete"/>
-                </button>
+                <DeleteButton onDelete={() => dispatch(removeQuizQuestion(props.question.id))} />
             </div>
         </div>
     )
 }
+
+/*
+{
+    const [selected, setSelected] = useState<string>("");
+
+    const addOption = () => {
+        const newValue = `option-${option.length + 1}`;
+        setOption([...option, newValue]);
+    };
+
+    option.map((value) => (
+         <label key={value}>
+             <input
+                 type="radio"
+                 name="options"
+                 value={value}
+                 checked={selected === value}
+                 onChange={() => setSelected(value)}
+             />
+             {value}
+         </label>
+     ))
+}
+    */
 
 export default QuizQuestionView

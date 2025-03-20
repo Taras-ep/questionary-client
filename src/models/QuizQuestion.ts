@@ -3,4 +3,5 @@ export default interface QuizQuestion {
     questionText: string | null;
     questionType: string | null;
     isEdit: boolean;
+    options?: string[] | null
 }
