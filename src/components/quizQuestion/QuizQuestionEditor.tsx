@@ -1,8 +1,8 @@
 import React from "react";
-import { QuizQuestion } from "../models/QuizQuestionState.ts";
+import { QuizQuestion } from "../../models/QuizQuestionState.ts";
 import QuizQuestionEditorView from "./QuizQuestionEditorView.tsx";
 import QuizQuestionEditorForm from "./QuizQuestionEditorForm.tsx";
-import '../styles/QuizQuestion.scss'
+import './QuizQuestion.scss'
 
 interface QuizQuestionEditorProps {
     quizId: string,

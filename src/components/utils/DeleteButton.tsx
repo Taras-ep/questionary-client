@@ -1,5 +1,5 @@
 import React from "react";
-import '../styles/delete-button.scss'
+import './DeleteButton.scss'
 
 interface DeleteButtonProps {
     onDelete: () => void

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useButtonIsActiveStyle } from "../../../Utils/hooks/buttonIsActiveStyle.tsx";
-import '../../../styles/LogIn.scss'
+import './LogIn.scss'
 import '../../../styles/mediaRequests/auth-form-media-req.scss'
-import ButtonContinue from "../../../Utils/ButtonContinue/ButtonContinue.tsx";
+import ButtonContinue from "../../utils/ButtonContinue.tsx";
 import { placeholderInputAnimation } from '../../../Utils/placeholderInputAnimation/placeholderInputAnimation.ts'
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";

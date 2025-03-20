@@ -1,8 +1,8 @@
 import React, { useRef, useState, useMemo } from "react";
 import { useButtonIsActiveStyle } from "../../../Utils/hooks/buttonIsActiveStyle.tsx";
-import '../../../styles/SignUp.scss'
+import './SignUp.scss'
 import '../../../styles/mediaRequests/auth-form-media-req.scss'
-import ButtonContinue from "../../../Utils/ButtonContinue/ButtonContinue.tsx";
+import ButtonContinue from "../../utils/ButtonContinue.tsx";
 import { SignUpService } from "../../../service/SignUpService.ts";
 import StackedError from "../../../errors/StackedError.ts";
 import HttpError from "../../../errors/HttpError.ts";

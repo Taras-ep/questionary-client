@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removeQuestionFromQuiz } from "../Utils/Redux/QuizCatalogReducer.ts";
-import {QuizQuestion} from "../models/QuizQuestionState.ts";
-import DeleteButton from "../Utils/DeleteButton.tsx";
-import '../styles/QuizQuestion.scss'
+import { removeQuestionFromQuiz } from "../../Utils/Redux/QuizCatalogReducer.ts";
+import {QuizQuestion} from "../../models/QuizQuestionState.ts";
+import DeleteButton from "../utils/DeleteButton.tsx";
+import './QuizQuestion.scss'
 
 interface QuizQuestionEditorViewProps {
     quizId: string,

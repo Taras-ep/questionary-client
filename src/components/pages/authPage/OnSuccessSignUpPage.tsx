@@ -1,6 +1,6 @@
 import React from "react";
-import '../../styles/OnSignUpSuccessPage.scss'
-import ButtonContinue from "../../Utils/ButtonContinue/ButtonContinue.tsx";
+import './OnSignUpSuccessPage.scss'
+import ButtonContinue from "../../utils/ButtonContinue.tsx";
 import { Link } from "react-router-dom";
 
 const OnSuccessSignUpPage = () => {

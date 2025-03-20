@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import QuizQuestionView from '../quizQuestion/QuizQuestionView.tsx';
-import submitQuiz from '../Utils/Redux/API/submitQuiz.ts';
-import { RootState } from '../models/RootState.ts';
-import { AppDispatch } from '../Utils/Redux/Store.ts';
-import '../styles/TakeQuizPage.scss';
+import submitQuiz from '../../Utils/Redux/API/submitQuiz.ts';
+import { RootState } from '../../models/RootState.ts';
+import { AppDispatch } from '../../Utils/Redux/Store.ts';
+import './QuizAttemptPage.scss';
 
 const QuizAttemptPage = () => {
     const navigate = useNavigate();

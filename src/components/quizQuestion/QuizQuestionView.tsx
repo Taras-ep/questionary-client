@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { removeQuestionFromQuiz } from "../Utils/Redux/QuizCatalogReducer.ts";
-import { QuizQuestion, MULTIPLE_CHOICE_QUESTION_TYPE, TEXT_QUESTIO0N_TYPE, SINGLE_CHOICE_QUESTION_TYPE } from "../models/QuizQuestionState.ts";
-import DeleteButton from "../Utils/DeleteButton.tsx";
-import '../styles/QuizQuestion.scss'
-import { setUserAnswer } from "../Utils/Redux/QuizAttemptReducer.ts";
+import { removeQuestionFromQuiz } from "../../Utils/Redux/QuizCatalogReducer.ts";
+import { QuizQuestion, MULTIPLE_CHOICE_QUESTION_TYPE, TEXT_QUESTIO0N_TYPE, SINGLE_CHOICE_QUESTION_TYPE } from "../../models/QuizQuestionState.ts";
+import DeleteButton from "../utils/DeleteButton.tsx";
+import './QuizQuestion.scss'
+import { setUserAnswer } from "../../Utils/Redux/QuizAttemptReducer.ts";
 
 interface QuizQuestionViewProps {
     quizId: string,

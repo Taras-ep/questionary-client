@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import '../styles/MenuBar.scss'
+import './MenuBar.scss'
 import { useSelector } from "react-redux";
-import { UserAuth } from "../Utils/Redux/Store";
+import { RootState } from "../../models/RootState";
 
 const MenuBar = () => {
-    const authState = useSelector((state: UserAuth) => state.authState)
+    const authState = useSelector((state: RootState) => state.authState)
 
     return (
         <div className="menu-bar-container">

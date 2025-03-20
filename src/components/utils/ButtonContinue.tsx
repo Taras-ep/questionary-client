@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react"
-import '../../styles/ButtonContinue.scss'
+import './ButtonContinue.scss'
 import '../../styles/mediaRequests/auth-form-media-req.scss'
 
 interface ButtonContinueProps {

@@ -1,6 +1,6 @@
 import React from "react";
-import '../../styles/FormUserLogIn.scss';
-import LogIn from './logIn/LogIn.tsx';
+import './FormUserLogIn.scss';
+import LogIn from './LogIn.tsx';
 import { Link } from "react-router-dom";
 
 const AuthForm = () => {

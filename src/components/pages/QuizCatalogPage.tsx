@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../models/RootState";
-import "../styles/QuizCatalog.scss";
+import { RootState } from "../../models/RootState.ts";
+import "./QuizCatalogPage.scss";
 import { useNavigate } from "react-router-dom";
-import { clearAnswers } from "../Utils/Redux/QuizAttemptReducer.ts";
+import { clearAnswers } from "../../Utils/Redux/QuizAttemptReducer.ts";
 import QuizCard from "../quiz/QuizCard.tsx";
 
 const QuizCatalog = () => {

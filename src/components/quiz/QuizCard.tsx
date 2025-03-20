@@ -1,5 +1,5 @@
 import React from "react";
-import { deleteQuiz, editQuiz } from "../Utils/Redux/QuizCatalogReducer.ts";
+import { deleteQuiz, editQuiz } from "../../Utils/Redux/QuizCatalogReducer.ts";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 

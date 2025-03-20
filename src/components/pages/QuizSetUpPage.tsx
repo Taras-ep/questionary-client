@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { addQuiz, editQuiz } from "../Utils/Redux/QuizCatalogReducer.ts";
-import { RootState } from "../models/RootState.ts";
-import '../styles/QuizSetUpPage.scss';
+import { addQuiz, editQuiz } from "../../Utils/Redux/QuizCatalogReducer.ts";
+import { RootState } from "../../models/RootState.ts";
+import './QuizSetUpPage.scss';
 
 const QuizSetUpPage = () => {
     const navigate = useNavigate();

@@ -1,13 +1,13 @@
 import React from 'react'
 import './App.css';
-import EditQuiz from './pages/QuizEditorPage.tsx';
-import LogInPage from './pages/authPage/LogInPage.tsx';
-import SignUpPage from './pages/authPage/SignUpPage.tsx';
-import OnSuccessSignUpPage from './pages/authPage/OnSuccessSignUpPage.tsx';
-import QuizCatalog from './pages/QuizCatalogPage.tsx';
-import QuizSetUpPage from './pages/QuizSetUpPage.tsx';
-import MenuBar from './menuBar/MenuBar.tsx';
-import QuizAttemptPage from './pages/QuizAttemptPage.tsx';
+import EditQuiz from './components/pages/QuizEditorPage.tsx';
+import LogInPage from './components/pages/authPage/LogInPage.tsx';
+import SignUpPage from './components/pages/authPage/SignUpPage.tsx';
+import OnSuccessSignUpPage from './components/pages/authPage/OnSuccessSignUpPage.tsx';
+import QuizCatalog from './components/pages/QuizCatalogPage.tsx';
+import QuizSetUpPage from './components/pages/QuizSetUpPage.tsx';
+import MenuBar from './components/menuBar/MenuBar.tsx';
+import QuizAttemptPage from './components/pages/QuizAttemptPage.tsx';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 

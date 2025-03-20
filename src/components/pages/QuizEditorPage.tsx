@@ -1,13 +1,13 @@
 import React from "react";
-import '../styles/QuizEditorPage.scss'
-import '../styles/mediaRequests/main-page-media-requests.scss'
+import './QuizEditorPage.scss'
+import '../../styles/mediaRequests/main-page-media-requests.scss'
 import { useDispatch } from "react-redux";
 import QuizQuestion from "../quizQuestion/QuizQuestionEditor.tsx";
 import { useSelector } from "react-redux";
-import { RootState } from "../models/RootState.ts";
-import { addQuizQuestion } from '../Utils/Redux/QuizQuestionReducer.ts'
-import { addQuestionToQuiz } from "../Utils/Redux/QuizCatalogReducer.ts";
-import { Quiz } from "../models/QuizState.ts";
+import { RootState } from "../../models/RootState.ts";
+import { addQuizQuestion } from '../../Utils/Redux/QuizQuestionReducer.ts'
+import { addQuestionToQuiz } from "../../Utils/Redux/QuizCatalogReducer.ts";
+import { Quiz } from "../../models/QuizState.ts";
 import { useParams } from "react-router-dom";
 
 

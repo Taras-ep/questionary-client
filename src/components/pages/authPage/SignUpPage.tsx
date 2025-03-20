@@ -1,6 +1,6 @@
 import React from "react";
-import '../../styles/FormUserSignUp.scss';
-import SignUp from "./signUp/SignUp.tsx";
+import './FormUserSignUp.scss';
+import SignUp from "./SignUp.tsx";
 import { Link } from "react-router-dom";
 
 const SignUpPage = () => {
