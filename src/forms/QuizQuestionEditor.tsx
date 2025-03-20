@@ -1,11 +1,13 @@
 import React, { useRef, useState } from "react";
 import '../styles/UserQuizQuestionForm.scss'
 import { useDispatch } from "react-redux";
-import { removeQuizQuestion, updateQuizQuestion } from "../Utils/Redux/QuizCatalogReducer.ts";
-import QuizQuestion from "../models/QuizQuestion.ts";
+import { addQuestionToQuiz, removeQuestionFromQuiz } from "../Utils/Redux/QuizCatalogReducer.ts";
+import { addQuizQuestion, updateQuizQuestion, removeQuizQuestion } from "../Utils/Redux/QuizQuestionReducer.ts";
+import { QuizQuestion } from "../models/QuizQuestion.ts";
 import DeleteButton from "../Utils/DeleteButton.tsx";
 
 interface QuizQuestionEditorProps {
+    quizId: string,
     question: QuizQuestion,
     questionNumber: number
 }
@@ -67,7 +69,7 @@ const QuizQuestionEditor = (props: QuizQuestionEditorProps) => {
             </div>
         ));
     }
-    
+
     const removeOption = (index: number) => {
         const newOptions = options.filter((_, i) => i !== index);
         setOptions(newOptions);
@@ -92,7 +94,9 @@ const QuizQuestionEditor = (props: QuizQuestionEditorProps) => {
                     <button type="button" className="button-save" onClick={() => { updateQuizQuestionOnClick() }}>
                         OK
                     </button>
-                    <button type="button" className="button-cancel" onClick={() => { dispatch(removeQuizQuestion(props.question.id)) }}>
+                    <button type="button" className="button-cancel" onClick={() => {
+                        dispatch(removeQuestionFromQuiz({ quizId: props.quizId, questionId: props.question.id }))
+                    }}>
                         CANCEL
                     </button>
                 </div>

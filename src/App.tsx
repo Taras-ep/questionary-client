@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path={'/'} element={<QuizCatalog />} />
           <Route path='/QuizSetUpPage' element={<QuizSetUpPage />} />
-          <Route path={'/EditQuiz'} element={<EditQuiz />} />
+          <Route path={'/EditQuiz/:quizId'} element={<EditQuiz/>} />
           <Route path={'/LogInPage'} element={<LogInPage />} />
           <Route path={'/SignUpPage'} element={<SignUpPage />} />
           <Route path={'/SignUpPage/OnSuccessSignUpPage'} element={<OnSuccessSignUpPage />} />

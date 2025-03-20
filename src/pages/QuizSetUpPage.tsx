@@ -1,20 +1,31 @@
 import React, { useRef, useState } from "react";
-import '../styles/QuizSetUpPage.scss';
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addQuiz } from "../Utils/Redux/QuizCatalogReducer.ts";
+import '../styles/QuizSetUpPage.scss';
 
 const QuizSetUpPage = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const quizNameRef = useRef<HTMLInputElement>(null);
+    const quizDescriptionRef = useRef<HTMLTextAreaElement>(null);
 
-    const navigate = useNavigate()
-    const quizNameRef = useRef<HTMLInputElement>(null)
-    const quizDescriptionRef = useRef<HTMLTextAreaElement>(null) 
+    const createNewQuiz = () => {
+        if (quizNameRef.current && quizDescriptionRef.current) {
+            const quizName = quizNameRef.current.value;
+            const quizDescription = quizDescriptionRef.current.value;
 
-    const handleSubmit = () => {
-
+            if (quizName && quizDescription) {
+                const quizId = crypto.randomUUID(); 
+                dispatch(addQuiz({ id: quizId, name: quizName, description: quizDescription }));
+                navigate(`/EditQuiz/${quizId}`); 
+            }
+        }
     };
 
     return (
         <div className="quiz-set-up-page-container">
-            <form className="quiz-form" onSubmit={handleSubmit}>
+            <form className="quiz-form">
                 <h2>Quiz Setup</h2>
                 <div className="form-group">
                     <label htmlFor="quiz-name">Quiz Name</label>
@@ -34,8 +45,8 @@ const QuizSetUpPage = () => {
                     />
                 </div>
                 <div className="buttons-container">
-                    <button type="button" className="button cancle-btn" onClick={() => navigate('/')}>CANCLE</button>
-                    <button type="button" className="button continue-btn">CONTINUE</button>
+                    <button type="button" className="button cancle-btn" onClick={() => navigate('/')}>CANCEL</button>
+                    <button type="button" className="button continue-btn" onClick={createNewQuiz}>CONTINUE</button>
                 </div>
             </form>
         </div>

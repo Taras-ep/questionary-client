@@ -1,33 +1,51 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import QuizQuestion from "../../models/QuizQuestion.ts";
+import { Quiz, QuizzesState } from "../../models/Quiz.ts";
 
-interface Quiz {
-    quizQuestionsList: QuizQuestion[];
-}
-
-const initialQuizState: Quiz = {
-    quizQuestionsList: []
+const initialState: QuizzesState = {
+  byId: {},
+  allIds: []
 };
 
-const quizQuestionSlice = createSlice({
-    name: "quizQuestion",
-    initialState: initialQuizState,
-    reducers: {
-        addQuizQuestion: (state, action: PayloadAction<QuizQuestion>) => {
-            state.quizQuestionsList.push(action.payload);
-        },
-        updateQuizQuestion: (state, action: PayloadAction<QuizQuestion>) => {
-            const index = state.quizQuestionsList.findIndex(question => question.id === action.payload.id);
-            if (index !== -1) {
-                state.quizQuestionsList[index] = action.payload;
-            }
-        },
-        removeQuizQuestion: (state, action) => {
-            state.quizQuestionsList = state.quizQuestionsList.filter(question => question.id != action.payload)
-        }
+const quizzesSlice = createSlice({
+  name: "quizzes",
+  initialState,
+  reducers: {
+    addQuiz: (state, action: PayloadAction<{ id: string; name: string; description: string }>) => {
+      const { id, name, description } = action.payload;
+      state.byId[id] = { id, name, description, isEdit: false, questions: [] };
+      state.allIds.push(id);
+    },
+    editQuiz: (state, action: PayloadAction<{ id: string; name: string; description: string }>) => {
+      const { id, name, description } = action.payload;
+      if (state.byId[id]) {
+        state.byId[id].name = name;
+        state.byId[id].description = description;
+      }
+    },
+    deleteQuiz: (state, action: PayloadAction<{ id: string }>) => {
+      const { id } = action.payload;
+      if (state.byId[id]) {
+        const newById = { ...state.byId };
+        delete newById[id];
+        state.byId = newById;
+        state.allIds = state.allIds.filter(qId => qId !== id);
+      }
+    },
+    addQuestionToQuiz: (state, action: PayloadAction<{ quizId: string; questionId: string }>) => {
+      const { quizId, questionId } = action.payload;
+      if (state.byId[quizId] && !state.byId[quizId].questions.includes(questionId)) {
+        state.byId[quizId].questions.push(questionId);
+      }
+    },
+    removeQuestionFromQuiz: (state, action: PayloadAction<{ quizId: string; questionId: string }>) => {
+      const { quizId, questionId } = action.payload;
+      if (state.byId[quizId] && state.byId[quizId].questions.length > 0) {
+        state.byId[quizId].questions = state.byId[quizId].questions.filter(qId => qId !== questionId);
+      }
     }
+  }
 });
 
-export {Quiz}
-export const {  addQuizQuestion,  updateQuizQuestion, removeQuizQuestion } = quizQuestionSlice.actions;
-export default quizQuestionSlice.reducer;
+
+export const { addQuiz, editQuiz, deleteQuiz, addQuestionToQuiz, removeQuestionFromQuiz } = quizzesSlice.actions;
+export default quizzesSlice.reducer;

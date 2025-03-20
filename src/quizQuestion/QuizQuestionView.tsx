@@ -1,11 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removeQuizQuestion, updateQuizQuestion } from "../Utils/Redux/QuizCatalogReducer.ts";
-import QuizQuestion from "../models/QuizQuestion.ts";
+import { removeQuestionFromQuiz } from "../Utils/Redux/QuizCatalogReducer.ts";
+import {QuizQuestion} from "../models/QuizQuestion.ts";
 import DeleteButton from "../Utils/DeleteButton.tsx";
 import '../styles/QuizQuestion.scss'
 
 interface QuizQuestionEditorProps {
+    quizId: string,
     question: QuizQuestion,
     questionNumber: number
 }
@@ -25,7 +26,7 @@ const QuizQuestionView = (props: QuizQuestionEditorProps) => {
                 >
                     EDIT
                 </button>
-                <DeleteButton onDelete={() => dispatch(removeQuizQuestion(props.question.id))} />
+                <DeleteButton onDelete={() => dispatch(removeQuestionFromQuiz({questionId:props.question.id, quizId: props.quizId}))} />
             </div>
         </div>
     )

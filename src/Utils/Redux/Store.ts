@@ -1,23 +1,20 @@
+// Store.ts
+
 import { configureStore } from "@reduxjs/toolkit";
-import quizQuestionReducer, { Quiz } from './QuizCatalogReducer.ts';
-import getUserReducer, { AuthState } from './AuthUserReducer.ts'
+import quizCatalogReducer from './QuizCatalogReducer.ts';
+import quizQuestionReducer from './QuizQuestionReducer.ts';
+import getUserReducer from './AuthUserReducer.ts'
 
-interface QuizStore {
-    quizCatalog: Quiz
-} 
+import { QuizzesState } from "../../models/Quiz.ts";
 
-interface UserAuth {
-    authState: AuthState
-}
-
-const Store = configureStore({
-    reducer: {
-        quizCatalog: quizQuestionReducer,
-        authState: getUserReducer
-    }
+const store = configureStore({
+  reducer: {
+    quizzes: quizCatalogReducer,
+    questions: quizQuestionReducer,
+    authState: getUserReducer
+  }
 })
 
-export { QuizStore }
-export { UserAuth }
-export type AppDispatch = typeof Store.dispatch;
-export default Store;
+export default store;
+
+export type AppDispatch = typeof store.dispatch;

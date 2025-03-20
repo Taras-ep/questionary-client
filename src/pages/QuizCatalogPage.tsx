@@ -1,12 +1,17 @@
+// QuizCatalog.tsx
 import React from "react";
-import '../styles/QuizCatalog.scss'
-import QuizSetUpPage from "./QuizSetUpPage";
+import { useSelector } from "react-redux";
+import { RootState } from "../models/RootState";
+import '../styles/QuizCatalog.scss';
 import { useNavigate } from "react-router-dom";
 
 const QuizCatalog = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const quizzes = useSelector((state: RootState) => state.quizzes.allIds); 
+    const quizById = useSelector((state: RootState) => state.quizzes.byId);
+
     function quizSetUpHandleClick() {
-        navigate('/QuizSetUpPage')
+        navigate('/QuizSetUpPage');
     }
 
     return (
@@ -16,16 +21,21 @@ const QuizCatalog = () => {
                 <div className="quiz-card add-card" onClick={quizSetUpHandleClick}>
                     <span className="plus">+</span>
                 </div>
-                {/*
-                {[...Array(5)].map((_, index) => (
-                    <div key={index} className="quiz-card">
-                        <h3>Quiz name</h3>
-                        <p>Quiz description</p>
-                        <a href="#">Questions: 17</a>
-                        <span className="menu">⋮</span>
-                    </div>
-                ))}
-                */}
+                {quizzes.length === 0 ? (
+                    <p>No quizzes available</p>
+                ) : (
+                    quizzes.map((quizId) => {
+                        const quiz = quizById[quizId];
+                        return (
+                            <div key={quizId} className="quiz-card">
+                                <h3>{quiz.name}</h3>
+                                <p>{quiz.description}</p>
+                                <a href="#">Questions: {quiz.questions.length}</a>
+                                <span className="menu">⋮</span>
+                            </div>
+                        );
+                    })
+                )}
             </div>
         </div>
     );
