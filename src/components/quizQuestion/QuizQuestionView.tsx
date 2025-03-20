@@ -99,28 +99,4 @@ const QuizQuestionView = (props: QuizQuestionViewProps) => {
     )
 }
 
-/*
-{
-    const [selected, setSelected] = useState<string>("");
-
-    const addOption = () => {
-        const newValue = `option-${option.length + 1}`;
-        setOption([...option, newValue]);
-    };
-
-    option.map((value) => (
-         <label key={value}>
-             <input
-                 type="radio"
-                 name="options"
-                 value={value}
-                 checked={selected === value}
-                 onChange={() => setSelected(value)}
-             />
-             {value}
-         </label>
-     ))
-}
-    */
-
 export default QuizQuestionView

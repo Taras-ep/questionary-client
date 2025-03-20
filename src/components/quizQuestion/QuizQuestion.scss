@@ -41,20 +41,26 @@
                 overflow-wrap: break-word;
             }
 
-            .button-edit {
-                height: 2.5rem;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                font-size: 1rem;
-                transition: background-color 0.2s ease-in-out;
-                background-color: #4a90e2;
-                color: white;
-                font-weight: bold;
-                padding: 0 1.8rem;
+            .buttons-container {
+                display: flex;
+                justify-content: flex-end;
+                gap: 1rem;
+                width: 100%;
+                .button-edit {
+                    height: 2.5rem;
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-size: 1rem;
+                    transition: background-color 0.2s ease-in-out;
+                    background-color: #4a90e2;
+                    color: white;
+                    font-weight: bold;
+                    padding: 0 1.8rem;
 
-                &:hover {
-                    background-color: #357abd;
+                    &:hover {
+                        background-color: #357abd;
+                    }
                 }
             }
         }

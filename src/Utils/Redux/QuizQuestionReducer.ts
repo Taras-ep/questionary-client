@@ -28,9 +28,15 @@ const quizQuestionSlice = createSlice({
                 delete state.byId[id];
                 state.allIds = state.allIds.filter(qId => qId !== id);
             }
-        }
+        },
+        editQuestionInQuiz: (state, action: PayloadAction<{questionId: string; isEdit: boolean }>) => {
+            const {questionId, isEdit } = action.payload;
+            if (state.byId[questionId]) {
+                state.byId[questionId].isEdit = isEdit
+            }
+         }
     }
 });
 
-export const { addQuizQuestion, updateQuizQuestion, removeQuizQuestion } = quizQuestionSlice.actions;
+export const { addQuizQuestion, updateQuizQuestion, removeQuizQuestion, editQuestionInQuiz} = quizQuestionSlice.actions;
 export default quizQuestionSlice.reducer;

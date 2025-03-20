@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { removeQuestionFromQuiz } from "../../Utils/Redux/QuizCatalogReducer.ts";
 import { QuizQuestion } from "../../models/QuizQuestionState.ts";
 import QuizQuestionView from "./QuizQuestionView.tsx";
 import DeleteButton from "../utils/DeleteButton.tsx";
+import QuizQuestionEditorForm from "./QuizQuestionEditorForm.tsx";
+import { editQuestionInQuiz } from "../../Utils/Redux/QuizQuestionReducer.ts";
 import './QuizQuestion.scss'
 
 interface QuizQuestionEditorViewProps {
@@ -13,49 +15,32 @@ interface QuizQuestionEditorViewProps {
 }
 
 const QuizQuestionEditorView = (props: QuizQuestionEditorViewProps) => {
+
     const dispatch = useDispatch()
+
     return (
         <div className="quiz-question-view-container">
             <div className="top-view-container">
                 <div className="quiz-question-index">{props.questionIndex + 1}</div>
-
-                <QuizQuestionView quizId={props.quizId} question={props.question} preview={true} />
-                <button
-                    aria-label="edit-question"
-                    type="button"
-                    className="button-edit"
-                    onClick={() => { }}
-                >
-                    EDIT
-                </button>
-                <DeleteButton onDelete={() => dispatch(removeQuestionFromQuiz({ questionId: props.question.id, quizId: props.quizId }))} />
+                {props.question.isEdit ? (
+                    <QuizQuestionEditorForm questionNumber={props.questionIndex} quizId={props.quizId} question={props.question} />
+                ) : (
+                    <QuizQuestionView quizId={props.quizId} question={props.question} preview={true} />
+                )}
+                <div className="buttons-container">
+                    <button
+                        aria-label="edit-question"
+                        type="button"
+                        className="button-edit"
+                        onClick={() => dispatch(editQuestionInQuiz({ questionId: props.question.id, isEdit: true }))}
+                    >
+                        EDIT
+                    </button>
+                    <DeleteButton onDelete={() => dispatch(removeQuestionFromQuiz({ questionId: props.question.id, quizId: props.quizId }))} />
+                </div>
             </div>
         </div>
     )
 }
-
-/*
-{
-    const [selected, setSelected] = useState<string>("");
-
-    const addOption = () => {
-        const newValue = `option-${option.length + 1}`;
-        setOption([...option, newValue]);
-    };
-
-    option.map((value) => (
-         <label key={value}>
-             <input
-                 type="radio"
-                 name="options"
-                 value={value}
-                 checked={selected === value}
-                 onChange={() => setSelected(value)}
-             />
-             {value}
-         </label>
-     ))
-}
-    */
 
 export default QuizQuestionEditorView

@@ -16,9 +16,9 @@ const QuizQuestionEditorForm = (props: QuizQuestionEditorFormProps) => {
 
     const dispatch = useDispatch()
 
-    const questionTextRef = useRef<HTMLInputElement>(null)
-    const [questionType, setQuestionType] = useState<string>('Text')
-    const [options, setOptions] = useState<string[]>([]);
+    const [questionText, setQuestionText] = useState(props.question.questionText || "")
+    const [questionType, setQuestionType] = useState<string>(props.question.questionType || "Text")
+    const [options, setOptions] = useState<string[]>(props.question.options || []);
 
     const showOptions = questionType === 'Single choice' || questionType === 'Multiple choice'
 
@@ -28,20 +28,18 @@ const QuizQuestionEditorForm = (props: QuizQuestionEditorFormProps) => {
 
 
     function updateQuizQuestionOnClick() {
-        if (questionTextRef.current) {
-            const newQuestionId = crypto.randomUUID()
-            const oldQuestionId = props.question.id
-            const updatedQuestion: QuizQuestion = {
-                id: newQuestionId,
-                questionText: questionTextRef.current.value,
-                questionType: questionType,
-                isEdit: false,
-                options: options
-            };
+        const newQuestionId = crypto.randomUUID()
+        const oldQuestionId = props.question.id
+        const updatedQuestion: QuizQuestion = {
+            id: newQuestionId,
+            questionText: questionText,
+            questionType: questionType,
+            isEdit: false,
+            options: options
+        };
 
-            dispatch(updateQuizQuestion({oldQuestionId, question: updatedQuestion}));
-            dispatch(replaceQuestionInQuiz({quizId: props.quizId, oldQuestionId, newQuestionId}));
-        }
+        dispatch(updateQuizQuestion({ oldQuestionId, question: updatedQuestion }));
+        dispatch(replaceQuestionInQuiz({ quizId: props.quizId, oldQuestionId, newQuestionId }));
     }
 
     function renderAddChoiceButton() {
@@ -82,8 +80,17 @@ const QuizQuestionEditorForm = (props: QuizQuestionEditorFormProps) => {
         <form className="quiz-question-editor-container">
             <div className="quiz-question-editor-form">
                 <div className="top-container">
-                    <input ref={questionTextRef} aria-label="questionText" placeholder="QUESTION" className="question-text" type="text" />
-                    <select onChange={(e) => { setQuestionType(e.target.value) }} title="question-type" name="select-question-type" className="question-type-selection">
+                    <input onChange={e => setQuestionText(e.target.value)}
+                        value={questionText}
+                        aria-label="questionText"
+                        placeholder="QUESTION"
+                        className="question-text"
+                        type="text" />
+                    <select onChange={(e) => { setQuestionType(e.target.value) }}
+                        value={questionType || ''}
+                        title="question-type"
+                        name="select-question-type"
+                        className="question-type-selection">
                         <option>{TEXT_QUESTIO0N_TYPE}</option>
                         <option>{SINGLE_CHOICE_QUESTION_TYPE}</option>
                         <option>{MULTIPLE_CHOICE_QUESTION_TYPE}</option>
