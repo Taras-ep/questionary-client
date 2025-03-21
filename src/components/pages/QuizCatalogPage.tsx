@@ -2,22 +2,26 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../models/RootState.ts";
 import "./QuizCatalogPage.scss";
-import { addQuiz } from "../../Utils/Redux/QuizCatalogReducer.ts";
+import loadQuizzes from "../../Utils/Redux/API/loadQuizzes.ts";
 import { useNavigate } from "react-router-dom";
 import { clearAnswers } from "../../Utils/Redux/QuizAttemptReducer.ts";
 import QuizCard from "../quiz/QuizCard.tsx";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { AppDispatch } from "../../Utils/Redux/Store.ts";
 
 const QUIZZES_PER_LOAD = 4;
 
 const QuizCatalog = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const quizzesId = useSelector((state: RootState) => state.quizzes.allIds);
     const quizById = useSelector((state: RootState) => state.quizzes.byId);
     const quizzes = quizzesId.map(quizId => quizById[quizId]).filter(quiz => !quiz.isHidden)
 
     const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
+
+    const pageIndex = Math.floor(quizzes.length / QUIZZES_PER_LOAD)
+    const hasMore = useSelector((state: RootState) => state.quizzes.totalQuizzesCount == null || state.quizzes.totalQuizzesCount > quizzes.length)
 
     function handleClick(quizId: string) {
         setActiveMenuId((prev) => (prev === quizId ? null : quizId));
@@ -40,30 +44,33 @@ const QuizCatalog = () => {
                     <span className="plus">+</span>
                 </div>
                 <InfiniteScroll
-                        dataLength={quizzes.length}
-                        next={() => {
-                            dispatch(addQuiz({id: crypto.randomUUID(), description:"fdff", name:"Fdfdf"}))
-                        }}
-                        hasMore={true}
-                        loader={<h4>Loading...</h4>}
-                        endMessage={<p style={{ textAlign: "center" }}>No more quizzes</p>}
-                    >
-                {quizzes.length === 0 ? (
-                    <p>No quizzes available</p>
-                ) : (
-                    quizzes.map((quiz) => {
-                        return (
-                            <QuizCard
-                                key={quiz.id}
-                                quizId={quiz.id}
-                                quiz={quiz}
-                                isMenuActive={activeMenuId === quiz.id}
-                                onOptionsClick={() => handleClick(quiz.id)}
-                                onCardClick={() => quizStartHandleClick(quiz.id)}
-                            />
-                        );
-                    })
-                )}
+                    dataLength={quizzes.length}
+                    next={() => {
+                        dispatch(loadQuizzes({
+                            quizCountPerPage: QUIZZES_PER_LOAD,
+                            pageIndex: pageIndex + 1
+                        }))
+                    }}
+                    hasMore={hasMore}
+                    loader={<h4>Loading...</h4>}
+                    endMessage={<p style={{ textAlign: "center" }}>No more quizzes</p>}
+                >
+                    {quizzes.length === 0 ? (
+                        <p>No quizzes available</p>
+                    ) : (
+                        quizzes.map((quiz) => {
+                            return (
+                                <QuizCard
+                                    key={quiz.id}
+                                    quizId={quiz.id}
+                                    quiz={quiz}
+                                    isMenuActive={activeMenuId === quiz.id}
+                                    onOptionsClick={() => handleClick(quiz.id)}
+                                    onCardClick={() => quizStartHandleClick(quiz.id)}
+                                />
+                            );
+                        })
+                    )}
                 </InfiniteScroll>
             </div>
         </div>

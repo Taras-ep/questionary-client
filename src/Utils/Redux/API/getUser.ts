@@ -1,11 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import HttpError from "../../../errors/HttpError.ts";
+import { API_URL } from "./config.ts";
 
 const getUser = createAsyncThunk(
     "auth/fetchUser",
     async (thunkAPI) => {
         try {
-                let response = await fetch('http://localhost:2323/api/users/getUser', {
+                let response = await fetch(`${API_URL}/users/getUser`, {
                     method: 'get',
                     credentials: 'include'
                 })

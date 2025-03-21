@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import submitQuiz from './API/submitQuiz.ts';
+import submitQuizAttempt from './API/submitQuiz.ts';
 import { QuizAttemptState } from '../../models/QuizAttemptState.ts';
 
 
@@ -23,14 +23,14 @@ const quizAttemptSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(submitQuiz.pending, (state) => {
+      .addCase(submitQuizAttempt.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(submitQuiz.fulfilled, (state, action) => {
+      .addCase(submitQuizAttempt.fulfilled, (state, action) => {
         state.status = 'succeeded';
         console.log('Quiz submitted successfully:', action.payload);
       })
-      .addCase(submitQuiz.rejected, (state, action) => {
+      .addCase(submitQuizAttempt.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload as string;
       });

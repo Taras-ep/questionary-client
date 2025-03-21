@@ -20,6 +20,7 @@
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         overflow-x: hidden;
         overflow-y: auto;
+        position: relative;
 
         .output-alt-text {
             height: 100%;
@@ -37,7 +38,7 @@
         .add-button {
             position: absolute;
             right: 5rem;
-            bottom: 5rem;
+            bottom: 8rem;
             height: 4.5rem;
             width: 4.5rem;
             border-radius: 50%;
@@ -47,19 +48,73 @@
             align-items: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
             cursor: pointer;
-            transition: background 0.3s;
-            transition: transform 0.2s;
-
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+        
             &:hover {
                 background-color: #bcff8f;
                 transform: scale(0.95);
             }
-
+        
+            &:active {
+                background-color: #a3e673;
+                transform: scale(0.9);
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+            }
+        
             img {
                 height: 6rem;
                 width: 6rem;
             }
         }
 
+        .quiz-editor-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            position: absolute;
+            bottom: 2rem;
+            width: 100%;
+
+            .save-button, .discard-button {
+                padding: 0.8rem 2rem;
+                font-size: 1.2rem;
+                font-weight: bold;
+                border-radius: 8px;
+                border: none;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            .save-button {
+                background-color: #4CAF50;
+                color: white;
+
+                &:hover {
+                    background-color: #45a049;
+                    transform: scale(1.05);
+                }
+
+                &:active {
+                    background-color: #3d8b40;
+                    transform: scale(0.98);
+                }
+            }
+
+            .discard-button {
+                background-color: #FF5252;
+                color: white;
+
+                &:hover {
+                    background-color: #e04343;
+                    transform: scale(1.05);
+                }
+
+                &:active {
+                    background-color: #c93b3b;
+                    transform: scale(0.98);
+                }
+            }
+        }
     }
 }

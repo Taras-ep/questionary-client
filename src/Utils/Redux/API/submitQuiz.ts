@@ -1,12 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../../../models/RootState.ts";
+import { API_URL } from "./config.ts";
 
-const submitQuiz = createAsyncThunk(
+const submitQuizAttempt = createAsyncThunk(
     'quiz/submitQuiz',
     async (quizId: string, thunkAPI) => {
         try {
             const rootState = thunkAPI.getState() as RootState
-            const response = await fetch('/api/submitQuiz', {
+            const response = await fetch(`${API_URL}/submitQuizAttempt`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,4 +30,4 @@ const submitQuiz = createAsyncThunk(
     }
 );
 
-export default submitQuiz
+export default submitQuizAttempt

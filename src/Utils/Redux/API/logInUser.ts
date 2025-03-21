@@ -1,13 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { UserLogInValidator } from "../../inputValidation/userValidation.ts";
 import HttpError from "../../../errors/HttpError.ts";
+import { API_URL } from "./config.ts";
 
 const logInUser = createAsyncThunk(
     "auth/fetchUser",
     async ({ emailOrPhone, password }: { emailOrPhone: string; password: string }, thunkAPI) => {
         try {
             if (UserLogInValidator(emailOrPhone, password)) {
-                let response = await fetch('http://localhost:2323/api/users/logInUser', {
+                let response = await fetch(`${API_URL}/users/logInUser`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({emailOrPhone, password}),

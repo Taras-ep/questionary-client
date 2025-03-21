@@ -10,6 +10,16 @@
     box-shadow: 0 0 10px gray;
     z-index: 10;
 
+    .user-name-container {
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 0 1rem;
+        span {
+            font-size: 1.2rem;
+            color: #004494;
+        }
+    }
+
     .button {
         display: inline-block;
         padding: 0.8rem 2rem;

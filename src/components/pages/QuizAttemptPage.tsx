@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import QuizQuestionView from '../quizQuestion/QuizQuestionView.tsx';
-import submitQuiz from '../../Utils/Redux/API/submitQuiz.ts';
+import submitQuizAttempt from '../../Utils/Redux/API/submitQuiz.ts';
 import { RootState } from '../../models/RootState.ts';
 import { AppDispatch } from '../../Utils/Redux/Store.ts';
 import './QuizAttemptPage.scss';
@@ -25,7 +25,7 @@ const QuizAttemptPage = () => {
                     return <QuizQuestionView key={index} quizId={quizId!} questionIndex={index} question={value} preview={false}/>
                 })
             }
-            <button onClick={() => dispatch(submitQuiz(quizId!))}>Sumbit</button>
+            <button onClick={() => dispatch(submitQuizAttempt(quizId!))}>Sumbit</button>
         </div>
     );
 };

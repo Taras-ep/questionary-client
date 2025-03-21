@@ -20,7 +20,7 @@ const MenuBar = () => {
                     LOG IN
                 </Link>
                 : <div>
-                    <p className="user-name-container">User: {authState.user.name} </p>
+                    <p className="user-name-container">User: <span>{authState.user.userName}</span></p>
                     <Link to={"/LogInPage"} className="button log-out-button">
                         LOG OUT
                     </Link>

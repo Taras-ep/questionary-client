@@ -7,7 +7,8 @@ export interface QuizQuestion {
     questionText: string | null;
     questionType: string | null;
     isEdit: boolean;
-    options?: string[] | null
+    options?: string[] | null;
+    originalId?: string; // uuid that should be replaced in redux store with the new "id" that came from backend
 }
 
 export interface QuestionsState {
