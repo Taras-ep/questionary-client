@@ -64,6 +64,19 @@
         }
     }
 
+    
+    .log-out-button {
+        background-color: #ee3131;
+
+        &:hover {
+            background-color: #ee5858;
+        }
+
+        &:active {
+            background-color: #ee5858;
+        }
+    }
+
     .main-title {
         font-size: 2rem;
         font-weight: 500;

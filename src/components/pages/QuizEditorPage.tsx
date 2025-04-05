@@ -17,7 +17,7 @@ const QuizEditorPage = () => {
 
     const quiz = useSelector((state: RootState) => state.quizzes.byId[quizId]);
     const allQuestions = useSelector((state: RootState) => state.questions.byId);
-    const questions = quiz?.questions.map(questionId => allQuestions[questionId]);
+    const questions = quiz?.questionIds.map(questionId => allQuestions[questionId]);
 
     function addQuestionOnClick() {
         const questionId = crypto.randomUUID();

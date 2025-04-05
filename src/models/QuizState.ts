@@ -1,10 +1,17 @@
+import { QuizQuestion } from "./QuizQuestionState";
+
 export interface Quiz {
     id: string;
     name: string | null;
     description: string | null;
     isHidden: boolean; // if quiz is edited, the previous version is not deleted, but hidden
     oldQuizVersionId?: string,
-    questions: string[];
+    questionIds: string[];
+}
+
+
+export interface QuizWithQuestions extends Quiz {
+    questions: QuizQuestion[]
 }
 
 export interface QuizzesState {
@@ -12,5 +19,5 @@ export interface QuizzesState {
     allIds: string[];
     loading: boolean;
     error: string | null;
-    totalQuizzesCount: null | number
+    totalQuizCount: null | number
 }

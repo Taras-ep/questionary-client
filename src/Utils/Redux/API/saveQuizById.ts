@@ -6,12 +6,13 @@ const saveQuizById = createAsyncThunk(
     'quiz/saveQuizById',
     async (arg: {id: string, name: string, description: string, questions: QuizQuestion[]}, thunkAPI) => {
         try {
-            const response = await fetch(`${API_URL}/saveQuiz`, {
+            const response = await fetch(`${API_URL}/quiz`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(arg),
+                credentials: "include"
             });
 
             if (!response.ok) {

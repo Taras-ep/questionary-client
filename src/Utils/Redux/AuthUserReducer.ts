@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import logInUser from "./API/logInUser.ts";
+import getUser from "./API/getUser.ts";
+import logoutUser from "./API/logoutUser.ts";
 import User from "./User.ts";
 
 interface AuthState {
@@ -17,12 +19,7 @@ const initialState: AuthState = {
 const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {
-        logout: (state) => {
-            state.user = null;
-            state.error = null;
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(logInUser.pending, (state) => {
@@ -33,13 +30,37 @@ const authSlice = createSlice({
                 state.loading = false;
                 state.user = action.payload.user;
             })
-            .addCase(logInUser.rejected, (state, action: PayloadAction<any>) => {
+            .addCase(logInUser.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload;
+                state.error = action.payload as any;
+            })
+
+            .addCase(getUser.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getUser.fulfilled, (state, action: PayloadAction<any>) => {
+                state.loading = false;
+                state.user = action.payload;
+            })
+            .addCase(getUser.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as any;
+            })
+            .addCase(logoutUser.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(logoutUser.fulfilled, (state) => {
+                state.loading = false;
+                state.user = null;
+            })
+            .addCase(logoutUser.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as any;
             });
     },
 });
 
-export { AuthState }
-export const { logout } = authSlice.actions;
+export { AuthState };
 export default authSlice.reducer;
