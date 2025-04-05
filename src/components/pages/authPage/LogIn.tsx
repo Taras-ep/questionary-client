@@ -53,7 +53,7 @@ const LogIn = () => {
     }, []);
 
     useEffect(() => {
-        const intervalID = placeholderInputAnimation(inputPasswordRef, ['m y p a s s w o r d'], 100);
+        const intervalID= placeholderInputAnimation(inputPasswordRef, ['m y p a s s w o r d'], 100);
         return intervalID
     }, []);
 

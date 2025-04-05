@@ -1,5 +1,5 @@
 export default interface User {
-    userName: string
+    name: string
     email: string
     phone: string
 }

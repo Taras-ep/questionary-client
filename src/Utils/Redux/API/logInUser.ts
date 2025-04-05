@@ -12,10 +12,9 @@ const logInUser = createAsyncThunk(
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({emailOrPhone, password}),
-                    credentials: 'include'
+                    credentials: "include"
                 })
                 if (!response.ok) {
-                    console.log(response)
                     throw new HttpError(await response.json());
                 }
                 return await response.json();

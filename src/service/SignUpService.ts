@@ -14,17 +14,17 @@ export class SignUpService {
 
     static readonly instace = new SignUpService()
 
-    private createUserData(name: string, email: string, phoneNumber: string, password: string) {
-        let isValidated = UserSignUpValidator(name, email, phoneNumber, password)
+    private createUserData(name: string, email: string, phone: string, password: string) {
+        let isValidated = UserSignUpValidator(name, email, phone, password)
         if (isValidated) {
-            let createUserJSON = { name, email, phoneNumber, password }
+            let createUserJSON = { name, email, phone, password }
             return createUserJSON
         }
 
     }
 
-    public async createUser(name: string, email: string, phoneNumber: string, password: string) {
-        let userData = this.createUserData(name, email, phoneNumber, password)
+    public async createUser(name: string, email: string, phone: string, password: string) {
+        let userData = this.createUserData(name, email, phone, password)
         if (userData) {
             let createUserResponse = await fetch('http://localhost:2323/api/users', {
                 method: 'POST',
@@ -33,7 +33,7 @@ export class SignUpService {
             })
 
             if (!createUserResponse.ok) {
-                throw new HttpError(createUserResponse.json());
+                console.log(createUserResponse.json())
             }
             return createUserResponse.json()
         }

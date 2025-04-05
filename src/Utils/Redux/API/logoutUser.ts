@@ -2,22 +2,22 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import HttpError from "../../../errors/HttpError.ts";
 import { API_URL } from "./config.ts";
 
-const getUser = createAsyncThunk(
-    "auth/getUser",
+const logoutUser = createAsyncThunk(
+    "auth/logoutUser",
     async (_, thunkAPI) => {
         try {
-            let response = await fetch(`${API_URL}/users/getUser`, {
+            let response = await fetch(`${API_URL}/users/logoutUser`, {
                 method: 'get',
-                credentials: 'include'
+                credentials: "include"
             })
             if (!response.ok) {
                 throw new HttpError(await response.json());
             }
-            return await response.json();
+            return 
         } catch (error: any) {
             return thunkAPI.rejectWithValue(error.message || "auth error");
         }
     }
 );
 
-export default getUser
+export default logoutUser
