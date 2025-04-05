@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../models/RootState.ts";
 import "./QuizCatalogPage.scss";
@@ -8,6 +8,7 @@ import { clearAnswers } from "../../Utils/Redux/QuizAttemptReducer.ts";
 import QuizCard from "../quiz/QuizCard.tsx";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { AppDispatch } from "../../Utils/Redux/Store.ts";
+import startQuizAttempt from "../../Utils/Redux/API/startQuizAttempt.ts";
 
 const QUIZZES_PER_LOAD = 4;
 
@@ -20,8 +21,15 @@ const QuizCatalog = () => {
 
     const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
 
+    useEffect(() => {
+        dispatch(loadQuizzes({
+            quizCountPerPage: QUIZZES_PER_LOAD,
+            pageIndex: 0
+        }))
+    }, [])
+
     const pageIndex = Math.floor(quizzes.length / QUIZZES_PER_LOAD)
-    const hasMore = useSelector((state: RootState) => state.quizzes.totalQuizzesCount == null || state.quizzes.totalQuizzesCount > quizzes.length)
+    const hasMore = useSelector((state: RootState) => state.quizzes.totalQuizCount == null || state.quizzes.totalQuizCount > quizzes.length)
 
     function handleClick(quizId: string) {
         setActiveMenuId((prev) => (prev === quizId ? null : quizId));
@@ -33,6 +41,7 @@ const QuizCatalog = () => {
 
     function quizStartHandleClick(quizId: string) {
         dispatch(clearAnswers());
+        dispatch(startQuizAttempt(quizId))
         navigate(`StartQuiz/${quizId}`);
     }
 
@@ -44,11 +53,12 @@ const QuizCatalog = () => {
                     <span className="plus">+</span>
                 </div>
                 <InfiniteScroll
+                    style={{ overflow: 'none' }}
                     dataLength={quizzes.length}
                     next={() => {
                         dispatch(loadQuizzes({
                             quizCountPerPage: QUIZZES_PER_LOAD,
-                            pageIndex: pageIndex + 1
+                            pageIndex: pageIndex
                         }))
                     }}
                     hasMore={hasMore}

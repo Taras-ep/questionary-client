@@ -9,7 +9,7 @@ const initialState: QuizzesState = {
   allIds: [],
   loading: false,
   error: null,
-  totalQuizzesCount: null
+  totalQuizCount: null
 };
 
 const quizzesSlice = createSlice({
@@ -18,14 +18,14 @@ const quizzesSlice = createSlice({
   reducers: {
     addQuiz: (state, action: PayloadAction<{ id: string; name: string; description: string }>) => {
       const { id, name, description } = action.payload;
-      state.byId[id] = { id, name, description, isHidden: true, questions: [] };
+      state.byId[id] = { id, name, description, isHidden: true, questionIds: [] };
       state.allIds.push(id);
     },
     editQuiz: (state, action: PayloadAction<{ id: string; newId: string, name: string; description: string }>) => {
       const { id, newId, name, description } = action.payload;
       if (state.byId[id]) {
         const oldQuiz = state.byId[id]
-        state.byId[newId] = { oldQuizVersionId: id, id: newId, name, description, isHidden: true, questions: oldQuiz.questions };
+        state.byId[newId] = { oldQuizVersionId: id, id: newId, name, description, isHidden: true, questionIds: oldQuiz.questionIds };
         state.allIds.push(newId)
       }
     },
@@ -37,21 +37,21 @@ const quizzesSlice = createSlice({
     },
     addQuestionToQuiz: (state, action: PayloadAction<{ quizId: string; questionId: string }>) => {
       const { quizId, questionId } = action.payload;
-      if (state.byId[quizId] && !state.byId[quizId].questions.includes(questionId)) {
-        state.byId[quizId].questions.push(questionId);
+      if (state.byId[quizId] && !state.byId[quizId].questionIds.includes(questionId)) {
+        state.byId[quizId].questionIds.push(questionId);
       }
     },
     replaceQuestionInQuiz:  (state, action: PayloadAction<{ quizId: string; oldQuestionId: string, newQuestionId }>) => {
       const { quizId, oldQuestionId, newQuestionId } = action.payload;
-      if (state.byId[quizId] && state.byId[quizId].questions.includes(oldQuestionId)) {
-        const oldQuestionIndex = state.byId[quizId].questions.indexOf(oldQuestionId)
-        state.byId[quizId].questions[oldQuestionIndex] = newQuestionId;
+      if (state.byId[quizId] && state.byId[quizId].questionIds.includes(oldQuestionId)) {
+        const oldQuestionIndex = state.byId[quizId].questionIds.indexOf(oldQuestionId)
+        state.byId[quizId].questionIds[oldQuestionIndex] = newQuestionId;
       }
     },
     removeQuestionFromQuiz: (state, action: PayloadAction<{ quizId: string; questionId: string }>) => {
       const { quizId, questionId } = action.payload;
-      if (state.byId[quizId] && state.byId[quizId].questions.length > 0) {
-        state.byId[quizId].questions = state.byId[quizId].questions.filter(qId => qId !== questionId);
+      if (state.byId[quizId] && state.byId[quizId].questionIds.length > 0) {
+        state.byId[quizId].questionIds = state.byId[quizId].questionIds.filter(qId => qId !== questionId);
       }
     }
   },
@@ -63,7 +63,8 @@ const quizzesSlice = createSlice({
     })
     .addCase(loadQuizzes.fulfilled, (state, action) => {
       state.loading = false;
-      action.payload.forEach((quiz: Quiz) => {
+      state.totalQuizCount = action.payload.totalQuizCount
+      action.payload.quizzes.forEach((quiz: Quiz) => {
         state.byId[quiz.id] = quiz;
         if (!state.allIds.includes(quiz.id)) {
           state.allIds.push(quiz.id);
